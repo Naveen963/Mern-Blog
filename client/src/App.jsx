@@ -9,17 +9,24 @@ import SignUp from './pages/SignUp'
 import Dasboard from './pages/Dasboard'
 import Projects from './pages/Projects'
 import NoPageFound from './pages/NoPageFound'
+import Header from './components/Header'
 
 function App() {
   const [count, setCount] = useState(0)
 
   const router = createBrowserRouter([
-    { path: '/', element: <Home /> },
-    { path: '/about', element: <About /> },
-    { path: '/sign-in', element: <SignIn /> },
-    { path: '/sign-up', element: <SignUp /> },
-    { path: '/dashboard', element: <Dasboard /> },
-    { path: '/projects', element: <Projects /> },
+    {
+      path: '/', element: <Header />,
+      children: [
+        { path: '/', index: true, element: <Home /> },
+        { path: '/about', element: <About /> },
+        { path: '/sign-in', element: <SignIn /> },
+        { path: '/sign-up', element: <SignUp /> },
+        { path: '/dashboard', element: <Dasboard /> },
+        { path: '/projects', element: <Projects /> },
+      ]
+    },
+
     { path: '*', element: <NoPageFound /> },
   ])
 
@@ -27,7 +34,6 @@ function App() {
   return (
     <>
       <RouterProvider router={router} />
-
     </>
   )
 }
