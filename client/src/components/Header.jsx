@@ -3,6 +3,7 @@ import { Link, Outlet, useLocation } from 'react-router-dom'
 import { Button, Navbar, TextInput } from "flowbite-react";
 import { AiOutlineSearch } from 'react-icons/ai'
 import { FaMoon } from 'react-icons/fa'
+import FooterComp from './Footer';
 
 const Header = () => {
     const path = useLocation();
@@ -21,7 +22,7 @@ const Header = () => {
                     <Button className='w-12 h-10 hidden sm:inline' color='gray' pill >
                         <FaMoon />
                     </Button>
-                    <Link tp='/sign-in'>
+                    <Link to='/sign-in'>
                         <Button gradientDuoTone="purpleToBlue" outline>
                             Sign In
                         </Button>
@@ -41,6 +42,7 @@ const Header = () => {
                 </Navbar.Collapse>
             </Navbar>
             <Outlet />
+            <FooterComp />
         </>
     )
 }
