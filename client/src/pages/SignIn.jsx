@@ -3,12 +3,14 @@ import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { Toast } from "flowbite-react";
 import { FaExclamationCircle } from 'react-icons/fa';
+import { useDispatch, useSelector } from 'react-redux';
+import { signInFailure, signInStart, signInSuccess } from '../store/slices/userSlice';
 
 const SignIn = () => {
     const navigate = useNavigate();
     const [formData, setFormData] = useState({});
-    const [errorMessage, setErrorMessage] = useState(null);
-    const [loading, setLoading] = useState(false);
+    const dispatch = useDispatch();
+    const { loading, error: errorMessage } = useSelector(state => state.user)
 
     const handleFormData = (e) => {
         setFormData({ ...formData, [e.target.id]: e.target.value.trim() });
@@ -17,11 +19,10 @@ const SignIn = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         if (!formData.password || !formData.email) {
-            return setErrorMessage('Please fill out all fields')
+            return dispatch(signInFailure('Please fill out all fields'))
         }
         try {
-            setLoading(true)
-            setErrorMessage(null)
+            dispatch(signInStart())
             const res = await fetch('/api/auth/signin', {
                 method: 'POST',
                 headers: {
@@ -32,16 +33,15 @@ const SignIn = () => {
 
             const data = await res.json();
             if (data.success == false) {
-                return setErrorMessage(data.message)
+                dispatch(signInFailure(data.message))
             }
-            setLoading(false)
             if (res.ok) {
+                dispatch(signInSuccess(data))
                 navigate('/')
             }
         }
         catch (err) {
-            setErrorMessage(err.message)
-            setLoading(false)
+            dispatch(signInFailure(err.message))
         }
     }
 
