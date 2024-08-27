@@ -5,6 +5,7 @@ import { Toast } from "flowbite-react";
 import { FaExclamationCircle } from 'react-icons/fa';
 import { useDispatch, useSelector } from 'react-redux';
 import { signInFailure, signInStart, signInSuccess } from '../store/slices/userSlice';
+import OAuth from '../components/OAuth';
 
 const SignIn = () => {
     const navigate = useNavigate();
@@ -77,6 +78,7 @@ const SignIn = () => {
                                     <span className='pl-3'>Loading...</span>
                                 </>
                             ) : 'Sign Up'}</Button>
+                        <OAuth />
                     </form>
                     <div className="flex gap-2 text-sm mt-5">
                         <span>Don't have an account?</span>
