@@ -10,6 +10,7 @@ import Dasboard from './pages/Dasboard'
 import Projects from './pages/Projects'
 import NoPageFound from './pages/NoPageFound'
 import Header from './components/Header'
+import PrivateRoute from './components/PrivateRoute'
 
 function App() {
   const [count, setCount] = useState(0)
@@ -22,7 +23,11 @@ function App() {
         { path: '/about', element: <About /> },
         { path: '/sign-in', element: <SignIn /> },
         { path: '/sign-up', element: <SignUp /> },
-        { path: '/dashboard', element: <Dasboard /> },
+        {
+          element: <PrivateRoute />, children: [
+            { path: '/dashboard', element: <Dasboard /> },
+          ]
+        },
         { path: '/projects', element: <Projects /> },
       ]
     },
