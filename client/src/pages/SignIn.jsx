@@ -77,16 +77,16 @@ const SignIn = () => {
                                     <Spinner size="sm" />
                                     <span className='pl-3'>Loading...</span>
                                 </>
-                            ) : 'Sign Up'}</Button>
+                            ) : 'Sign In'}</Button>
                         <OAuth />
                     </form>
                     <div className="flex gap-2 text-sm mt-5">
                         <span>Don't have an account?</span>
-                        <Link to='/sign-up' className='text-blue-500'>Sign In</Link>
+                        <Link to='/sign-up' className='text-blue-500'>Sign Up</Link>
                     </div>
                     {
                         errorMessage && (
-                            <Toast className='mt-5 bg-red-500 text-white'>
+                            <Toast className='mt-5 dark:bg-red-500 bg-gray-500 text-white'>
                                 <FaExclamationCircle className="h-5 w-5" />
                                 <div className="pl-4 text-sm font-normal">{errorMessage}</div>
                             </Toast>
