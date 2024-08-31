@@ -14,7 +14,6 @@ import PrivateRoute from './components/PrivateRoute'
 import { useSelector } from 'react-redux'
 
 function App() {
-  const [count, setCount] = useState(0)
   const { currentUser } = useSelector((state) => state.user)
   const router = createBrowserRouter([
     {

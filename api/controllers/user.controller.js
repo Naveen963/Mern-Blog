@@ -50,7 +50,9 @@ export const updateUser = async (req, res, next) => {
 
     const { password, ...rest } = updatedUser._doc;
     res.status(200).json(rest);
-  } catch (err) {}
+  } catch (err) {
+    next(err);
+  }
 };
 
 export const deleteUser = async (req, res, next) => {
@@ -60,6 +62,17 @@ export const deleteUser = async (req, res, next) => {
   try {
     await User.findByIdAndDelete(req.params.userId);
     res.status(200).json("User has been deleted");
+  } catch (err) {
+    next(err);
+  }
+};
+
+export const signOut = async (req, res, next) => {
+  try {
+    res
+      .clearCookie("access_token")
+      .status(200)
+      .json("user has been signed out");
   } catch (err) {
     next(err);
   }

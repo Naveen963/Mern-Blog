@@ -1,17 +1,36 @@
-import React from 'react'
-import { Link, Outlet, useLocation } from 'react-router-dom'
-import { Avatar, Button, Dropdown, DropdownHeader, Navbar, TextInput } from "flowbite-react";
-import { AiOutlineSearch } from 'react-icons/ai'
-import { FaMoon, FaSun } from 'react-icons/fa'
-import FooterComp from './Footer';
+import { Avatar, Button, Dropdown, Navbar, TextInput } from "flowbite-react";
+import React from 'react';
+import { AiOutlineSearch } from 'react-icons/ai';
+import { FaMoon, FaSun } from 'react-icons/fa';
 import { useDispatch, useSelector } from 'react-redux';
+import { Link, Outlet, useLocation, useNavigate } from 'react-router-dom';
+import { signOutSuccess } from '../store/slices/userSlice';
 import { toggleTheme } from '../store/theme/themeslice';
+import FooterComp from './Footer';
 
 const Header = () => {
     const path = useLocation();
     const dispatch = useDispatch();
+    const navigate = useNavigate();
     const { currentUser } = useSelector(state => state.user)
     const { theme } = useSelector(state => state.theme)
+    const handlleSignOut = async () => {
+        try {
+            const res = await fetch(`/api/user/signout`, {
+                method: 'POST'
+            })
+            const data = await res.json();
+            if (!res.ok) {
+            }
+            else {
+                dispatch(signOutSuccess())
+                navigate('/sign-in')
+            }
+        }
+        catch (err) {
+
+        }
+    }
     return (
         <>
             <Navbar className='border-b-2'>
@@ -37,7 +56,7 @@ const Header = () => {
                             <Link to="/dashboard?tab=profile">
                                 <Dropdown.Item>Profile</Dropdown.Item></Link>
                             <Dropdown.Divider />
-                            <Dropdown.Item>Sign Out</Dropdown.Item>
+                            <Dropdown.Item onClick={handlleSignOut}>Sign Out</Dropdown.Item>
                         </Dropdown>
                     )
                         :
