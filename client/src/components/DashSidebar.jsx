@@ -29,7 +29,6 @@ const DashSidebar = () => {
             }
         }
         catch (err) {
-
         }
     }
     return (
