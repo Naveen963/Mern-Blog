@@ -164,7 +164,6 @@ const DashProfile = () => {
             }
         }
         catch (err) {
-
         }
     }
 
