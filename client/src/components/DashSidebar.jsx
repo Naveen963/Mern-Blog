@@ -3,12 +3,13 @@ import React, { useEffect, useState } from 'react'
 import { HiArrowSmRight, HiUser } from 'react-icons/hi'
 import { Link, useLocation } from 'react-router-dom';
 import { signOutSuccess } from '../store/slices/userSlice';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 const DashSidebar = () => {
     const location = useLocation();
     const dispatch = useDispatch()
     const [tab, setTab] = useState('')
+    const { currentUser } = useSelector(state => state.user)
     useEffect(() => {
         const urlParams = new URLSearchParams(location.search)
         const tabFromUrl = urlParams.get('tab')
@@ -36,7 +37,7 @@ const DashSidebar = () => {
             <Sidebar.Items>
                 <Sidebar.ItemGroup>
                     <Link to="/dashboard?tab=profile">
-                        <Sidebar.Item active={tab === 'profile'} icon={HiUser} label={'User'} labelColor="dark" as="div">
+                        <Sidebar.Item active={tab === 'profile'} icon={HiUser} label={currentUser.isAdmin ? 'Admin' : 'User'} labelColor="dark" as="div">
                             Profile
                         </Sidebar.Item>
                     </Link>

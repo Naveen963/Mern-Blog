@@ -12,6 +12,8 @@ import NoPageFound from './pages/NoPageFound'
 import Header from './components/Header'
 import PrivateRoute from './components/PrivateRoute'
 import { useSelector } from 'react-redux'
+import AdminPrivateRoute from './components/AdminPrivateRoute'
+import CreatePost from './pages/CreatePost'
 
 function App() {
   const { currentUser } = useSelector((state) => state.user)
@@ -26,6 +28,11 @@ function App() {
         {
           element: <PrivateRoute />, children: [
             { path: '/dashboard', element: <Dasboard /> },
+          ]
+        },
+        {
+          element: <AdminPrivateRoute />, children: [
+            { path: '/create-post', element: <CreatePost /> }
           ]
         },
         { path: '/projects', element: <Projects /> },
