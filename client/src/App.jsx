@@ -14,6 +14,7 @@ import PrivateRoute from './components/PrivateRoute'
 import { useSelector } from 'react-redux'
 import AdminPrivateRoute from './components/AdminPrivateRoute'
 import CreatePost from './pages/CreatePost'
+import PostPage from './pages/PostPage'
 
 function App() {
   const { currentUser } = useSelector((state) => state.user)
@@ -36,6 +37,7 @@ function App() {
           ]
         },
         { path: '/projects', element: <Projects /> },
+        { path: '/post/:postSlug', element: <PostPage /> },
       ]
     },
 
