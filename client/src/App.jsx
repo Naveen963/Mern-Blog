@@ -13,6 +13,7 @@ import PostPage from './pages/PostPage'
 import Projects from './pages/Projects'
 import SignIn from './pages/SignIn'
 import SignUp from './pages/SignUp'
+import UpdatePost from './pages/UpdatePost'
 
 function App() {
   const { currentUser } = useSelector((state) => state.user)
@@ -31,7 +32,8 @@ function App() {
         },
         {
           element: <AdminPrivateRoute />, children: [
-            { path: '/create-post', element: <CreatePost /> }
+            { path: '/create-post', element: <CreatePost /> },
+            {path:'/update-post/:postId', element: <UpdatePost />}
           ]
         },
         { path: '/projects', element: <Projects /> },
