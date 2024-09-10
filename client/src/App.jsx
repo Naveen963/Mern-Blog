@@ -33,7 +33,7 @@ function App() {
         {
           element: <AdminPrivateRoute />, children: [
             { path: '/create-post', element: <CreatePost /> },
-            {path:'/update-post/:postId', element: <UpdatePost />}
+            {path:'/update-post/:postId' element: <UpdatePost />}
           ]
         },
         { path: '/projects', element: <Projects /> },
@@ -43,7 +43,6 @@ function App() {
 
     { path: '*', element: <NoPageFound /> },
   ])
-
 
   return (
     <>
